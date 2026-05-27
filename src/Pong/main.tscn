@@ -1,20 +1,19 @@
 [gd_scene format=3 uid="uid://ku8ya1lwqhtn"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yypac"]
-
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yypac"]
-normal = Vector2(0, 1)
-distance = 360.0
+distance = 180.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pjlkm"]
+normal = Vector2(0, 1)
+distance = 180.0
 
 [node name="Main" type="Node2D" unique_id=1736438763]
 
-[node name="Arena" type="StaticBody2D" parent="." unique_id=1276921718]
-physics_material_override = SubResource("PhysicsMaterial_yypac")
+[node name="OOB" type="Area2D" parent="." unique_id=1079547250]
+position = Vector2(320, 180)
 
-[node name="TopBound" type="CollisionShape2D" parent="Arena" unique_id=935991305]
+[node name="Top" type="CollisionShape2D" parent="OOB" unique_id=501109278]
 shape = SubResource("WorldBoundaryShape2D_yypac")
 
-[node name="BottomBound" type="CollisionShape2D" parent="Arena" unique_id=1276531335]
+[node name="Bottom" type="CollisionShape2D" parent="OOB" unique_id=422336980]
 shape = SubResource("WorldBoundaryShape2D_pjlkm")
