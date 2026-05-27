@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://phxdycmyn877" path="res://src/Pong/main.gd" id="1_rhlyw"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yypac"]
-distance = 180.0
+normal = Vector2(0, 1)
+distance = -180.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pjlkm"]
-normal = Vector2(0, 1)
-distance = 180.0
+distance = -180.0
 
 [sub_resource type="GDScript" id="GDScript_yypac"]
 script/source = "extends Area2D
