@@ -6,9 +6,7 @@ You don’t have to make this from computer parts, of course! With a modern engi
 
 ## Goals
 
-- [ ] Create an arena with two walls and a divider.
-  - [x] Walls
-  - [ ] Divider
+- [x] Create an arena with two walls and a divider.
 - [x] Add a paddle on either end of the play field. Use player inputs to move the paddles up and down.
 - [x] Add a ball that moves around the playfield and bounces off of the paddles and walls.
 - [x] Detect when the ball leaves the playfield. Assign a point to the player who scored.

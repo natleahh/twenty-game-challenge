@@ -1,6 +1,8 @@
 class_name PongBall extends Area2D
 
 @export var speed: FloatDoubler
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 
 var velocity: Vector2
 var serve_range: float = 0.2
@@ -30,3 +32,4 @@ func _on_body_entered(body: CollisionObject2D) -> void:
 		bounce(Vector2.RIGHT)
 	else:
 		bounce(Vector2.UP)
+	audio_stream_player_2d.play()
