@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bupgxnq7u7600" path="res://src/Common/float_doubler.gd" id="1_pjlkm"]
 [ext_resource type="Script" uid="uid://phxdycmyn877" path="res://src/Pong/main.gd" id="1_rhlyw"]
+[ext_resource type="Script" uid="uid://csuv6bykdmylh" path="res://src/Pong/pong_controller.gd" id="3_4o4r6"]
+[ext_resource type="Script" uid="uid://7bqq8edhfiib" path="res://src/Pong/paddle/paddle.gd" id="4_5qg6o"]
+[ext_resource type="Script" uid="uid://df1fhmdf12pep" path="res://src/Pong/ball.gd" id="5_64h2a"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yypac"]
 normal = Vector2(0, 1)
@@ -10,33 +13,30 @@ distance = -180.0
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pjlkm"]
 distance = -180.0
 
-[sub_resource type="GDScript" id="GDScript_yypac"]
-script/source = "extends Area2D
-class_name Ball
-
-@export var speed: FloatDoubler = FloatDoubler.new()
-
-var velocity: Vector2
-
-func _process(delta: float) -> void:
-	position += velocity * delta * speed.value
-	
-func bounce(normal: Vector2) -> void:
-	velocity = velocity.bounce(normal)
-"
-
-[sub_resource type="Resource" id="Resource_rhlyw"]
+[sub_resource type="Resource" id="Resource_10xlk"]
 script = ExtResource("1_pjlkm")
-big = 8.0
-small = 0.7090000000000001
+big = 9.0
+small = 0.5
 metadata/_custom_type_script = "uid://bupgxnq7u7600"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yypac"]
 
+[sub_resource type="Resource" id="Resource_64h2a"]
+script = ExtResource("1_pjlkm")
+big = 15.0
+metadata/_custom_type_script = "uid://bupgxnq7u7600"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5qg6o"]
+height = 68.0
+
 [node name="Main" type="Node2D" unique_id=1736438763]
 script = ExtResource("1_rhlyw")
 
-[node name="OOB" type="Area2D" parent="." unique_id=1079547250]
+[node name="PongPlayerController" type="Node" parent="." unique_id=1667268104]
+script = ExtResource("3_4o4r6")
+metadata/_custom_type_script = "uid://csuv6bykdmylh"
+
+[node name="OOB" type="StaticBody2D" parent="." unique_id=2056012935]
 position = Vector2(320, 180)
 
 [node name="Top" type="CollisionShape2D" parent="OOB" unique_id=501109278]
@@ -45,13 +45,24 @@ shape = SubResource("WorldBoundaryShape2D_yypac")
 [node name="Bottom" type="CollisionShape2D" parent="OOB" unique_id=422336980]
 shape = SubResource("WorldBoundaryShape2D_pjlkm")
 
-[node name="Ball" type="Area2D" parent="." unique_id=1403134633]
-position = Vector2(322, 179)
-script = SubResource("GDScript_yypac")
-speed = SubResource("Resource_rhlyw")
+[node name="PongBall" type="Area2D" parent="." unique_id=634985273]
+position = Vector2(320, 180)
+script = ExtResource("5_64h2a")
+speed = SubResource("Resource_10xlk")
+metadata/_custom_type_script = "uid://df1fhmdf12pep"
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=123903364]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PongBall" unique_id=123903364]
 shape = SubResource("CircleShape2D_yypac")
 
-[connection signal="area_entered" from="OOB" to="." method="_on_oob_area_entered"]
+[node name="Paddle" type="CharacterBody2D" parent="." unique_id=2103008497]
+position = Vector2(17, 215)
+script = ExtResource("4_5qg6o")
+speed = SubResource("Resource_64h2a")
+metadata/_custom_type_script = "uid://7bqq8edhfiib"
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle" unique_id=2126491331]
+shape = SubResource("CapsuleShape2D_5qg6o")
+
+[connection signal="body_entered" from="PongBall" to="PongBall" method="_on_body_entered"]
