@@ -2,7 +2,9 @@ extends Node2D
 
 @onready var pong_ball: PongBall = $PongBall
 @onready var pong_controller: PongPlayerController = $PongPlayerController
-@onready var paddle: Paddle = $Paddle
+
+@onready var player_1: Paddle = $Player1
+@onready var player_2: Paddle = $Player2
 
 var serve_range: float = 0.2
 
@@ -16,7 +18,6 @@ func get_serve_vector() -> Vector2:
 	var initial_arc: Vector2 = Vector2.from_angle(
 		randf_range(-PI * serve_range, PI * serve_range)
 	)
-
 	if randi() % 2:
 		return initial_arc
 	else:
@@ -26,4 +27,6 @@ func handle_ball_serve() -> void:
 	pong_ball.velocity = get_serve_vector()
 
 func handle_player_movement() -> void:
-	paddle.direction = pong_controller.direction
+	player_1.direction = pong_controller.player_1_direction
+	player_2.direction = pong_controller.player_2_direction
+	

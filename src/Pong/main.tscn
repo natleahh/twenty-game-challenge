@@ -38,6 +38,7 @@ metadata/_custom_type_script = "uid://csuv6bykdmylh"
 
 [node name="OOB" type="StaticBody2D" parent="." unique_id=2056012935]
 position = Vector2(320, 180)
+collision_mask = 3
 
 [node name="Top" type="CollisionShape2D" parent="OOB" unique_id=501109278]
 shape = SubResource("WorldBoundaryShape2D_yypac")
@@ -47,6 +48,8 @@ shape = SubResource("WorldBoundaryShape2D_pjlkm")
 
 [node name="PongBall" type="Area2D" parent="." unique_id=634985273]
 position = Vector2(320, 180)
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("5_64h2a")
 speed = SubResource("Resource_10xlk")
 metadata/_custom_type_script = "uid://df1fhmdf12pep"
@@ -55,14 +58,28 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PongBall" unique_id=123903364]
 shape = SubResource("CircleShape2D_yypac")
 
-[node name="Paddle" type="CharacterBody2D" parent="." unique_id=2103008497]
-position = Vector2(17, 215)
+[node name="Player1" type="CharacterBody2D" parent="." unique_id=2103008497]
+position = Vector2(17, 180)
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("4_5qg6o")
 speed = SubResource("Resource_64h2a")
 metadata/_custom_type_script = "uid://7bqq8edhfiib"
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle" unique_id=2126491331]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player1" unique_id=2126491331]
+shape = SubResource("CapsuleShape2D_5qg6o")
+
+[node name="Player2" type="CharacterBody2D" parent="." unique_id=1668857650]
+position = Vector2(623, 180)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("4_5qg6o")
+speed = SubResource("Resource_64h2a")
+metadata/_custom_type_script = "uid://7bqq8edhfiib"
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2" unique_id=225300693]
 shape = SubResource("CapsuleShape2D_5qg6o")
 
 [connection signal="body_entered" from="PongBall" to="PongBall" method="_on_body_entered"]
