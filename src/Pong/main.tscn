@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://csuv6bykdmylh" path="res://src/Pong/pong_controller.gd" id="3_4o4r6"]
 [ext_resource type="Script" uid="uid://7bqq8edhfiib" path="res://src/Pong/paddle/paddle.gd" id="4_5qg6o"]
 [ext_resource type="Script" uid="uid://df1fhmdf12pep" path="res://src/Pong/ball.gd" id="5_64h2a"]
+[ext_resource type="Script" uid="uid://ch8g8o1acf7rf" path="res://src/Pong/score_zone.gd" id="6_10xlk"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yypac"]
 normal = Vector2(0, 1)
@@ -28,6 +29,14 @@ metadata/_custom_type_script = "uid://bupgxnq7u7600"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5qg6o"]
 height = 68.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_64h2a"]
+normal = Vector2(1, 0)
+distance = -330.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wkjfr"]
+normal = Vector2(-1, 0)
+distance = -330.0
 
 [node name="Main" type="Node2D" unique_id=1736438763]
 script = ExtResource("1_rhlyw")
@@ -81,5 +90,17 @@ metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2" unique_id=225300693]
 shape = SubResource("CapsuleShape2D_5qg6o")
+
+[node name="ScoreZone" type="Area2D" parent="." unique_id=688600561]
+script = ExtResource("6_10xlk")
+metadata/_custom_type_script = "uid://ch8g8o1acf7rf"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreZone" unique_id=1344993616]
+position = Vector2(320, 180)
+shape = SubResource("WorldBoundaryShape2D_64h2a")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ScoreZone" unique_id=297708102]
+position = Vector2(320, 180)
+shape = SubResource("WorldBoundaryShape2D_wkjfr")
 
 [connection signal="body_entered" from="PongBall" to="PongBall" method="_on_body_entered"]
