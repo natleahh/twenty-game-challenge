@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://7bqq8edhfiib" path="res://src/Pong/paddle/paddle.gd" id="4_5qg6o"]
 [ext_resource type="Script" uid="uid://df1fhmdf12pep" path="res://src/Pong/ball.gd" id="5_64h2a"]
 [ext_resource type="Script" uid="uid://ch8g8o1acf7rf" path="res://src/Pong/score_zone.gd" id="6_10xlk"]
+[ext_resource type="Script" uid="uid://d1736xrn038ml" path="res://src/Pong/score_board.gd" id="7_wkjfr"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yypac"]
 normal = Vector2(0, 1)
@@ -103,4 +104,35 @@ shape = SubResource("WorldBoundaryShape2D_64h2a")
 position = Vector2(320, 180)
 shape = SubResource("WorldBoundaryShape2D_wkjfr")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=361007529]
+
+[node name="ScoreBoard" type="Control" parent="CanvasLayer" unique_id=1841682806]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_right = 160.0
+offset_bottom = 50.0
+grow_horizontal = 2
+script = ExtResource("7_wkjfr")
+
+[node name="Player1" type="Label" parent="CanvasLayer/ScoreBoard" unique_id=290360802]
+layout_mode = 1
+offset_right = 1.0
+offset_bottom = 23.0
+text = "0"
+
+[node name="Player2" type="Label" parent="CanvasLayer/ScoreBoard" unique_id=956950680]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "0"
+horizontal_alignment = 2
+
 [connection signal="body_entered" from="PongBall" to="PongBall" method="_on_body_entered"]
+[connection signal="point" from="ScoreZone" to="." method="_on_score_zone_point"]
