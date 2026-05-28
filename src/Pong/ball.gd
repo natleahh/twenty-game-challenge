@@ -12,9 +12,8 @@ func bounce(normal: Vector2) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	match body.name:
-		"Paddle":
-			bounce(Vector2.RIGHT)
-		_:
-			bounce(Vector2.UP)
+	if body.collision_layer == 2:	
+		bounce(Vector2.RIGHT)
+	else:
+		bounce(Vector2.UP)
 		
