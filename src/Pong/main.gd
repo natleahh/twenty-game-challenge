@@ -29,4 +29,3 @@ func handle_ball_serve() -> void:
 func handle_player_movement() -> void:
 	player_1.direction = pong_controller.player_1_direction
 	player_2.direction = pong_controller.player_2_direction
-	
