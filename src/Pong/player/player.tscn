@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://doq61xdbffm7o"]
+
+[ext_resource type="Script" uid="uid://7bqq8edhfiib" path="res://src/Pong/player/paddle.gd" id="1_ccusv"]
+[ext_resource type="Script" uid="uid://bupgxnq7u7600" path="res://src/Common/float_doubler.gd" id="2_o1611"]
+[ext_resource type="Texture2D" uid="uid://dhf60stdu0qqk" path="res://src/Pong/player/paddle.png" id="3_yu3mn"]
+
+[sub_resource type="Resource" id="Resource_g0ghb"]
+script = ExtResource("2_o1611")
+big = 15.0
+metadata/_custom_type_script = "uid://bupgxnq7u7600"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3sel2"]
+height = 68.0
+
+[node name="Player1" type="CharacterBody2D" unique_id=398169928]
+collision_layer = 4
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_ccusv")
+speed = SubResource("Resource_g0ghb")
+metadata/_custom_type_script = "uid://7bqq8edhfiib"
+metadata/_edit_group_ = true
+
+[node name="Paddle" type="Sprite2D" parent="." unique_id=1597448685]
+texture_filter = 1
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("3_yu3mn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2010432612]
+shape = SubResource("CapsuleShape2D_3sel2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1945208822]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=354290094]
+shape = SubResource("CapsuleShape2D_3sel2")

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://rkjgesqjshfu"]
+
+[ext_resource type="Script" uid="uid://d0c5f4r052u6h" path="res://src/Pong/player/main.gd" id="1_tgq61"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vt83r"]
+height = 42.0
+
+[node name="Main" type="CharacterBody2D" unique_id=857578151]
+script = ExtResource("1_tgq61")
+direction = null
+metadata/_custom_type_script = "uid://7bqq8edhfiib"
+
+[node name="AreaShape" type="CollisionShape2D" parent="." unique_id=1737324970]
+shape = SubResource("CapsuleShape2D_vt83r")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=702748022]
+
+[node name="BallShape" type="CollisionShape2D" parent="Area2D" unique_id=575382005]
+shape = SubResource("CapsuleShape2D_vt83r")

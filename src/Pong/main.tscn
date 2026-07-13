@@ -1,152 +1,82 @@
-[gd_scene format=3 uid="uid://ku8ya1lwqhtn"]
+[gd_scene format=3 uid="uid://dq0u2gnjfnpbn"]
 
-[ext_resource type="Script" uid="uid://bupgxnq7u7600" path="res://src/Common/float_doubler.gd" id="1_pjlkm"]
-[ext_resource type="Script" uid="uid://phxdycmyn877" path="res://src/Pong/main.gd" id="1_rhlyw"]
-[ext_resource type="Script" uid="uid://csuv6bykdmylh" path="res://src/Pong/pong_controller.gd" id="3_4o4r6"]
-[ext_resource type="Script" uid="uid://7bqq8edhfiib" path="res://src/Pong/paddle/paddle.gd" id="4_5qg6o"]
-[ext_resource type="Script" uid="uid://df1fhmdf12pep" path="res://src/Pong/ball.gd" id="5_64h2a"]
-[ext_resource type="Texture2D" uid="uid://dhf60stdu0qqk" path="res://src/Pong/paddle/paddle.png" id="6_1fawv"]
-[ext_resource type="Script" uid="uid://ch8g8o1acf7rf" path="res://src/Pong/score_zone.gd" id="6_10xlk"]
-[ext_resource type="Script" uid="uid://d1736xrn038ml" path="res://src/Pong/score_board.gd" id="7_wkjfr"]
-[ext_resource type="Texture2D" uid="uid://cnaa2htbfhp3j" path="res://src/Pong/ball.png" id="9_yafp4"]
+[ext_resource type="Script" uid="uid://bvgtif4f3kh1n" path="res://src/Pong/main.gd" id="1_rhlyw"]
+[ext_resource type="Script" uid="uid://csuv6bykdmylh" path="res://src/Pong/player/pong_controller.gd" id="2_5qg6o"]
+[ext_resource type="Script" uid="uid://d1736xrn038ml" path="res://src/Pong/score/score_board.gd" id="3_5qg6o"]
+[ext_resource type="PackedScene" uid="uid://doq61xdbffm7o" path="res://src/Pong/player/player.tscn" id="4_64h2a"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yypac"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_brxim"]
 normal = Vector2(0, 1)
 distance = -180.0
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pjlkm"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dlk8g"]
 distance = -180.0
 
-[sub_resource type="Resource" id="Resource_10xlk"]
-script = ExtResource("1_pjlkm")
-big = 9.0
-small = 0.5
-metadata/_custom_type_script = "uid://bupgxnq7u7600"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_yypac"]
-radius = 12.0
-
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_1fawv"]
-
-[sub_resource type="Resource" id="Resource_64h2a"]
-script = ExtResource("1_pjlkm")
-big = 15.0
-metadata/_custom_type_script = "uid://bupgxnq7u7600"
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5qg6o"]
-height = 68.0
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_64h2a"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vt83r"]
 normal = Vector2(1, 0)
-distance = -330.0
+distance = -320.0
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wkjfr"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rgntt"]
 normal = Vector2(-1, 0)
-distance = -330.0
+distance = -320.0
 
-[node name="Main" type="Node2D" unique_id=1736438763]
+[node name="PhysicsPong" type="Node2D" unique_id=2036735500 node_paths=PackedStringArray("pong_player_controller", "player_1", "player_2", "ceiling", "walls", "score_board")]
 script = ExtResource("1_rhlyw")
+pong_player_controller = NodePath("PongPlayerController")
+player_1 = NodePath("Player1")
+player_2 = NodePath("Player2")
+ceiling = NodePath("Ceiling")
+walls = NodePath("Walls")
+score_board = NodePath("Camera2D/ScoreBoard")
 
-[node name="PongPlayerController" type="Node" parent="." unique_id=1667268104]
-script = ExtResource("3_4o4r6")
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=798663338]
+
+[node name="PongPlayerController" type="Node" parent="." unique_id=1885937980]
+script = ExtResource("2_5qg6o")
 metadata/_custom_type_script = "uid://csuv6bykdmylh"
 
-[node name="OOB" type="StaticBody2D" parent="." unique_id=2056012935]
-position = Vector2(320, 180)
-collision_mask = 3
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=477468689]
+collision_mask = 15
+input_pickable = true
 
-[node name="Top" type="CollisionShape2D" parent="OOB" unique_id=501109278]
-shape = SubResource("WorldBoundaryShape2D_yypac")
+[node name="Top" type="CollisionShape2D" parent="Ceiling" unique_id=194544577]
+shape = SubResource("WorldBoundaryShape2D_brxim")
 
-[node name="Bottom" type="CollisionShape2D" parent="OOB" unique_id=422336980]
-shape = SubResource("WorldBoundaryShape2D_pjlkm")
+[node name="Right" type="CollisionShape2D" parent="Ceiling" unique_id=228351158]
+shape = SubResource("WorldBoundaryShape2D_dlk8g")
 
-[node name="PongBall" type="Area2D" parent="." unique_id=634985273]
-position = Vector2(320, 180)
-collision_layer = 3
-collision_mask = 3
-script = ExtResource("5_64h2a")
-speed = SubResource("Resource_10xlk")
-metadata/_custom_type_script = "uid://df1fhmdf12pep"
-metadata/_edit_group_ = true
+[node name="Walls" type="StaticBody2D" parent="." unique_id=1737652477]
+collision_mask = 15
 
-[node name="Ball" type="Sprite2D" parent="PongBall" unique_id=1037250674]
-texture_filter = 1
-scale = Vector2(2.5, 2.5)
-texture = ExtResource("9_yafp4")
+[node name="Left" type="CollisionShape2D" parent="Walls" unique_id=612470185]
+shape = SubResource("WorldBoundaryShape2D_vt83r")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PongBall" unique_id=123903364]
-shape = SubResource("CircleShape2D_yypac")
+[node name="Right" type="CollisionShape2D" parent="Walls" unique_id=1319092239]
+shape = SubResource("WorldBoundaryShape2D_rgntt")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="PongBall" unique_id=1977715125]
-stream = SubResource("AudioStreamGenerator_1fawv")
+[node name="Camera2D" type="Camera2D" parent="." unique_id=964880643]
 
-[node name="Player1" type="CharacterBody2D" parent="." unique_id=2103008497]
-position = Vector2(17, 180)
-collision_layer = 2
-collision_mask = 3
-script = ExtResource("4_5qg6o")
-speed = SubResource("Resource_64h2a")
-metadata/_custom_type_script = "uid://7bqq8edhfiib"
-metadata/_edit_group_ = true
-
-[node name="Paddle" type="Sprite2D" parent="Player1" unique_id=556162070]
-texture_filter = 1
-scale = Vector2(2.5, 2.5)
-texture = ExtResource("6_1fawv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player1" unique_id=2126491331]
-shape = SubResource("CapsuleShape2D_5qg6o")
-
-[node name="Player2" type="CharacterBody2D" parent="." unique_id=1668857650]
-position = Vector2(623, 180)
-collision_layer = 2
-collision_mask = 3
-script = ExtResource("4_5qg6o")
-speed = SubResource("Resource_64h2a")
-metadata/_custom_type_script = "uid://7bqq8edhfiib"
-metadata/_edit_group_ = true
-
-[node name="Paddle" type="Sprite2D" parent="Player2" unique_id=1216882701]
-texture_filter = 1
-scale = Vector2(2.5, 2.5)
-texture = ExtResource("6_1fawv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2" unique_id=225300693]
-shape = SubResource("CapsuleShape2D_5qg6o")
-
-[node name="ScoreZone" type="Area2D" parent="." unique_id=688600561]
-script = ExtResource("6_10xlk")
-metadata/_custom_type_script = "uid://ch8g8o1acf7rf"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreZone" unique_id=1344993616]
-position = Vector2(320, 180)
-shape = SubResource("WorldBoundaryShape2D_64h2a")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ScoreZone" unique_id=297708102]
-position = Vector2(320, 180)
-shape = SubResource("WorldBoundaryShape2D_wkjfr")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=361007529]
-
-[node name="ScoreBoard" type="Control" parent="CanvasLayer" unique_id=1841682806]
+[node name="ScoreBoard" type="Control" parent="Camera2D" unique_id=1071578065 node_paths=PackedStringArray("player_1_score", "player_2_score")]
 layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
+anchor_top = -0.5
+anchor_bottom = -0.5
 offset_left = -160.0
+offset_top = -141.0
 offset_right = 160.0
-offset_bottom = 50.0
+offset_bottom = -91.0
 grow_horizontal = 2
-script = ExtResource("7_wkjfr")
+script = ExtResource("3_5qg6o")
+player_1_score = NodePath("Player1")
+player_2_score = NodePath("Player2")
+metadata/_edit_group_ = true
 
-[node name="Player1" type="Label" parent="CanvasLayer/ScoreBoard" unique_id=290360802]
+[node name="Player1" type="Label" parent="Camera2D/ScoreBoard" unique_id=1874171946]
 layout_mode = 1
 offset_right = 1.0
 offset_bottom = 23.0
 text = "0"
 
-[node name="Player2" type="Label" parent="CanvasLayer/ScoreBoard" unique_id=956950680]
+[node name="Player2" type="Label" parent="Camera2D/ScoreBoard" unique_id=2037253255]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -157,5 +87,8 @@ grow_horizontal = 0
 text = "0"
 horizontal_alignment = 2
 
-[connection signal="body_entered" from="PongBall" to="PongBall" method="_on_body_entered"]
-[connection signal="point" from="ScoreZone" to="." method="_on_score_zone_point"]
+[node name="Player1" parent="." unique_id=398169928 instance=ExtResource("4_64h2a")]
+position = Vector2(-302, 0)
+
+[node name="Player2" parent="." unique_id=2041547699 instance=ExtResource("4_64h2a")]
+position = Vector2(299, 0)
